@@ -1,4 +1,5 @@
 import React from 'react';
+import Counter from './counter.js'
 import {Jumbotron, Container, Row, Col, Image, Media} from 'react-bootstrap';
 
 export default (props) => {
@@ -14,7 +15,10 @@ export default (props) => {
                             <h6><strong>TIMETABLE  GENERATOR</strong></h6>
                         </Media.Body>
                     </Media>
-                </Col>                
+                </Col>
+                <Col md={6}>
+                    <Counter server={props.server}/>
+                </Col>            
             </Row>
         </Container>
         </Jumbotron>

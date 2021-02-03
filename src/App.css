@@ -9,6 +9,7 @@ red #da2525
 .App{
     min-height:100vh;
     background : #fae3ad;
+    overflow: scroll;
 }
 .jumbotron{    
     background : #003050;
@@ -31,4 +32,19 @@ a, a:hover{
     text-decoration:none;
     color:#003050;
 
+}
+.jumbotron .card{
+    background-color: rgba(0,0,0,0.1);
+    border : 3px solid #7096a0;
+    color: #b0b7a7;    
+}
+.jumbotron .card-title{
+    font-size: 3rem;
+    margin: 0px;
+    padding:0px;
+}
+.jumbotron .card-footer{
+    background-color: rgba(0,0,0,0);
+    border-width : 0px;
+    font-size: 1.25rem;
 }
