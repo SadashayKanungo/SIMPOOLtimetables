@@ -1,6 +1,6 @@
 import React from 'react';
 import Counter from './counter.js'
-import {Jumbotron, Container, Row, Col, Image, Media} from 'react-bootstrap';
+import {Jumbotron, Container, Row, Col, Media} from 'react-bootstrap';
 
 export default (props) => {
     return(
@@ -16,8 +16,8 @@ export default (props) => {
                         </Media.Body>
                     </Media>
                 </Col>
-                <Col md={6}>
-                    <Counter server={props.server}/>
+                <Col md={{span:4,offset:2}}>
+                    <Counter server={props.server} counter={props.counter} getCount={props.getCount}/>
                 </Col>            
             </Row>
         </Container>

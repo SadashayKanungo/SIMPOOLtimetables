@@ -1,46 +1,40 @@
 import React from 'react';
-import{CardDeck, Card} from 'react-bootstrap';
+import{CardGroup, Card} from 'react-bootstrap';
 import CountUp from 'react-countup';
 
 class Counter extends React.Component{
-    state = {
-        count : {students:10,lists:20,tables:100},
-        loading : true
+    constructor(props){
+        super(props);
     }
-/*
-    async componentDidMount() {
-        const count = await fetch(this.props + "/count").json();
-        this.setState({loading : false, count : count});
-    }
-*/
+
     render() {
         return(
-            <CardDeck className="text-center" style={{height:'100%'}}>
+            <CardGroup className="text-center" style={{height:'90%'}}>                
                 <Card>
                     <Card.Body class="p-2">
                         <Card.Title>
-                            <CountUp end={this.state.count.students} />
+                            {this.props.counter.count ?
+                                <CountUp separator="," end={this.props.counter.count.tables} /> :
+                                <div>...</div>
+                            }
+                            
                         </Card.Title>
                     </Card.Body>
-                    <Card.Footer class="p-0"><strong>STUDENTS</strong></Card.Footer>
+                    <Card.Footer class="p-1"><strong>TABLES</strong></Card.Footer>
                 </Card>
                 <Card>
                     <Card.Body class="p-2">
                         <Card.Title>
-                                <CountUp end={this.state.count.lists} />
+                        {this.props.counter.count ?
+                                <CountUp separator="," end={this.props.counter.count.students} /> :
+                                <div>...</div>
+                            }
+                            
                         </Card.Title>
                     </Card.Body>
-                    <Card.Footer class="p-0"><strong>LISTS</strong></Card.Footer>
+                    <Card.Footer class="p-1"><strong>STUDENTS</strong></Card.Footer>
                 </Card>
-                <Card>
-                    <Card.Body class="p-2">
-                        <Card.Title>
-                            <CountUp end={this.state.count.tables} />
-                        </Card.Title>
-                    </Card.Body>
-                    <Card.Footer class="p-0"><strong>TABLES</strong></Card.Footer>
-                </Card>
-            </CardDeck>
+            </CardGroup>
         );
     }
 }

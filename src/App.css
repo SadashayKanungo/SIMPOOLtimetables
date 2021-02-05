@@ -35,16 +35,17 @@ a, a:hover{
 }
 .jumbotron .card{
     background-color: rgba(0,0,0,0.1);
-    border : 3px solid #7096a0;
-    color: #b0b7a7;    
+    border : 3px solid #7096a0;        
 }
 .jumbotron .card-title{
-    font-size: 3rem;
+    color: #b0b7a7;
+    font-size: 2.5rem;
     margin: 0px;
     padding:0px;
 }
-.jumbotron .card-footer{
+.jumbotron strong{
     background-color: rgba(0,0,0,0);
-    border-width : 0px;
-    font-size: 1.25rem;
+    color: #7096a0;
+    
+    font-size: 1rem;
 }

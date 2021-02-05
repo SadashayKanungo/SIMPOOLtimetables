@@ -6,7 +6,7 @@ export default (props) => {
         <Container fluid className="footer text-center align-items-center">
             <Row>
                 <Col xs={12} md={{span:4, order:2}}>
-                <p style={{width:"100%", fontSize:"125%"}} className="mt-4 text-center">Made with &#10084; by SK</p>           
+                <p style={{width:"100%"}} className="mt-4 text-center">Made with &#10084; at BPGC</p>  
                 </Col>
 
                 <Col xs={12} md={{span:4, order:1}}>
