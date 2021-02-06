@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './components/header.js';
+import Dashboard from './components/dashboard.js';
 import Footer from './components/footer.js';
 
 const serverURL = 'http://localhost:2000';
@@ -32,7 +33,8 @@ class App extends React.Component  {
   render() {
     return (
       <div className="App">                    
-        <Header server={serverURL} counter={this.state.counter} getCount={this.getCount}/>       
+        <Header server={serverURL} counter={this.state.counter} getCount={this.getCount}/>
+        <Dashboard />      
         <Footer />
       </div>
     );

@@ -9,7 +9,7 @@ export default (props) => {
             <Row>
                 <Col md={6}>
                     <Media>
-                        <img src="./logo.png" alt="logo" className="p-1" width="25%" />
+                        <img src="./logo.png" alt="logo" className="p-1" width="22.5%" />
                         <Media.Body class="xs-12 align-self-center text-center">
                             <h1>SIMPooL</h1>
                             <h6><strong>TIMETABLE  GENERATOR</strong></h6>

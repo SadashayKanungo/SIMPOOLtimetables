@@ -5,18 +5,16 @@ export default (props) => {
     return(        
         <Container fluid className="footer text-center align-items-center">
             <Row>
-                <Col xs={12} md={{span:4, order:2}}>
-                <p style={{width:"100%"}} className="mt-4 text-center">Made with &#10084; at BPGC</p>  
+                <Col xs={12} md={{span:4, order:2}} className="p-2">
+                <span className="text-center">Made with &#x2764; by f20190248</span>  
                 </Col>
 
-                <Col xs={12} md={{span:4, order:1}}>
-                <a href="https://github.com/SadashayKanungo"><i className="mt-2 fa fa-github-square fa-2x"></i></a><br/>
-                <span style={{width:"100%"}}>Check out the Source Code</span>
+                <Col xs={{span:3, offset:3}} md={{span:4, order:1, offset:0}}>
+                <a href="https://github.com/SadashayKanungo"><i className="mt-2 fa fa-github-square fa-2x"></i></a>                
                 </Col>
                 
-                <Col xs={12} md={{span:4, order:3}}>
-                <a href="https://www.linkedin.com/in/sadashay-kanungo-22a4321a0/"><i className="mt-2 fa fa-linkedin-square fa-2x"></i></a><br/>
-                <span style={{width:"100%"}}>Reach out for Feedback</span>
+                <Col xs={3} md={{span:4, order:3}}>
+                <a href="https://www.linkedin.com/in/sadashay-kanungo-22a4321a0/"><i className="mt-2 fa fa-linkedin-square fa-2x"></i></a>
                 </Col>
             </Row>   
         </Container>
