@@ -8,8 +8,8 @@ red #da2525
 */
 .App{
     min-height:100vh;
-    background : #fae3ad;
-    
+    background : #dac38d;
+    cursor:default;
 }
 .jumbotron{    
     background : #003050;
@@ -25,7 +25,6 @@ red #da2525
 .footer{
     background:#b0b7a7;
     color:#003050;
-    
 }
 a, a:hover{
     text-decoration:none;
@@ -45,33 +44,38 @@ a, a:hover{
 .jumbotron strong{
     background-color: rgba(0,0,0,0);
     color: #7096a0;
-    
-    font-size: 1rem;
 }
 .dashboard{
-    font-size: 0.75rem;;
+    min-height: 80vh;
 }
 .pool{
     background-color: #003050;
     color: #7096a0;
+    box-shadow: 5px 5px 5px rgba(0, 30, 50, 0.5);
+}
+.addpool{
+    background-color: rgba(0, 30, 50, 0.5);
+    color: #7096a0;
+    box-shadow: 5px 5px 5px #003050;
 }
 .course{
     background-color: #7096a0;
     color: #003050;
+    
 }
 .section{
-    background-color: rgba(255,255,255,0.3);
+    background-color: #b0b7a7;
     color: #003050;
+    font-size: 0.8rem; 
+}
+.sectiontitle{
+    font-size: 1rem;
 }
 .instructors{
-    width:100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 .section:hover{
     background-color: #fae3ad;
-}
-.badge:hover{
-    background-color: rgba(0,0,0,0.1);
 }

@@ -13,7 +13,7 @@ class Counter extends React.Component{
                 <Row>
                     <Col xs={6}>              
                         <Card>
-                            <Card.Body class="p-2">
+                            <Card.Body className="p-2">
                                 <Card.Title>
                                     {this.props.counter.count ?
                                         <CountUp separator="," end={this.props.counter.count.tables} /> :
@@ -24,12 +24,12 @@ class Counter extends React.Component{
                                     
                                 </Card.Title>
                             </Card.Body>
-                            <Card.Footer class="p-1"><strong>TABLES</strong></Card.Footer>
+                            <Card.Footer className="p-1"><strong>TABLES</strong></Card.Footer>
                         </Card>
                     </Col>
                     <Col xs={6}>
                         <Card>
-                            <Card.Body class="p-2">
+                            <Card.Body className="p-2">
                                 <Card.Title>
                                 {this.props.counter.count ?
                                         <CountUp separator="," end={this.props.counter.count.students} /> :
@@ -40,7 +40,7 @@ class Counter extends React.Component{
                                     
                                 </Card.Title>
                             </Card.Body>
-                            <Card.Footer class="p-1"><strong>STUDENTS</strong></Card.Footer>
+                            <Card.Footer className="p-1"><strong>STUDENTS</strong></Card.Footer>
                         </Card>
                     </Col>
                 </Row>
