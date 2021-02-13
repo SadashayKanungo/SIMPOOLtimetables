@@ -9,7 +9,7 @@ class Counter extends React.Component{
 
     render() {
         return(            
-            <Container className="text-center" style={{height:'90%'}}>
+            <Container className="text-center" style={{height:'100%'}}>
                 <Row>
                     <Col xs={6}>              
                         <Card>

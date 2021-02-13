@@ -13,12 +13,12 @@ const SortablePool = SortableElement((props) => (
     </ListGroup.Item>
 ));
 
-const SortablePoolList = SortableContainer(({poolList,data,reorder}) => {
+const SortablePoolList = SortableContainer(({poolList,data,modifyPoolList}) => {
   return (
     <ListGroup horizontal>
       {poolList.map((pool, index) => (
         <SortablePool key={pool.name} index={index}
-            pool={pool} data={data} poolIndex={index} reorder={reorder}/>
+            pool={pool} data={data} poolIndex={index} modifyPoolList={modifyPoolList}/>
       ))}
     </ListGroup>
   );
@@ -32,21 +32,39 @@ class Dashboard extends React.Component{
         this.state = {
             poolList : [{name:"CDCs", courses:[["MATH_F211 L1+T1","MATH_F211 L4+T4"],["ECON_F211 L1+T1"]], nos:2},{name:"DELs", courses:[["EEE_F215 L1+T1+P1","EEE_F215 L2+T2+P4","EEE_F215 L4+T1+P1","EEE_F215 L3+T1+P4"]], nos:1}]
         };
-        this.reorder = this.reorder.bind(this);
+        this.modifyPoolList = this.modifyPoolList.bind(this);
         this.onSortEnd = this.onSortEnd.bind(this);
     }
 
-    reorder(method, poolIndex, courseIndex, oldIndex, newIndex){
+    modifyPoolList(method, poolIndex, courseIndex, oldIndex, newIndex){
         var newPoolList = this.state.poolList.slice();
 
-        if(method==="section"){            
+        if(method==="sectionAdd"){            
             newPoolList[poolIndex].courses[courseIndex] = arrayMove(newPoolList[poolIndex].courses[courseIndex], oldIndex, newIndex);
         }
-        else if(method==="course"){
+        else if(method==="courseAdd"){
             newPoolList[poolIndex].courses = arrayMove(newPoolList[poolIndex].courses, oldIndex, newIndex);
         }
-        else if(method==="pool"){
+        else if(method==="poolAdd"){
             newPoolList = arrayMove(newPoolList, oldIndex, newIndex);
+        }
+        else if(method==="sectionMove"){            
+            newPoolList[poolIndex].courses[courseIndex] = arrayMove(newPoolList[poolIndex].courses[courseIndex], oldIndex, newIndex);
+        }
+        else if(method==="courseMove"){
+            newPoolList[poolIndex].courses = arrayMove(newPoolList[poolIndex].courses, oldIndex, newIndex);
+        }
+        else if(method==="poolMove"){
+            newPoolList = arrayMove(newPoolList, oldIndex, newIndex);
+        }
+        else if(method==="sectionDel"){            
+            newPoolList[poolIndex].courses[courseIndex].splice(oldIndex,1);
+        }
+        else if(method==="courseDel"){
+            newPoolList[poolIndex].courses.splice(oldIndex,1);
+        }
+        else if(method==="poolDel"){
+            newPoolList.splice(oldIndex,1);
         }
         else {return;}
         console.log(newPoolList);
@@ -54,7 +72,7 @@ class Dashboard extends React.Component{
     }
 
     onSortEnd({oldIndex, newIndex}){
-        this.reorder("pool", null, null, oldIndex, newIndex);
+        this.modifyPoolList("poolMove", null, null, oldIndex, newIndex);
     }
 
     render() {
@@ -62,7 +80,7 @@ class Dashboard extends React.Component{
             <div className="dashboard pl-4 pt-0 text-center"
                 style={{display: "flex", flexWrap: "nowrap", overflow: "auto"}}>
                 
-                <SortablePoolList poolList={this.state.poolList} data={this.props.data} reorder={this.reorder}
+                <SortablePoolList poolList={this.state.poolList} data={this.props.data} modifyPoolList={this.modifyPoolList}
                     axis="x" helperClass="pool text-center rounded" onSortEnd={this.onSortEnd} useDragHandle/>
 
                 <AddPool />

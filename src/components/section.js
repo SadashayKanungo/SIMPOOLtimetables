@@ -7,15 +7,18 @@ export default (props) => {
         let [c,s] = id.split(' ');
         return props.data[c].sec[s];
     }
+    function onDel(){
+        props.modifyPoolList("sectionDel",props.poolIndex,props.courseIndex,props.sectionIndex,null);
+    }
 
-    const SecHandle = SortableHandle(()=> (<i className="fa fa-bars fa-2x"></i>));
+    const SecHandle = SortableHandle(()=> (<i className="fa fa-sort fa-2x"></i>));
 
     return(        
         <Container fluid>
             <Accordion>
                 <Row className="p-1">
                     <Col xs={1} className="p-0">
-                        <i className="fa fa-times-circle fa-2x"></i>
+                        <i className="fa fa-times-circle fa-2x" onClick={onDel}></i>
                     </Col>
                     <Accordion.Toggle xs={9} className="sectiontitle" as={Col} eventKey="0">
                         <strong>{props.secid.split(' ')[1].replace(/\+/g,' ')}</strong>

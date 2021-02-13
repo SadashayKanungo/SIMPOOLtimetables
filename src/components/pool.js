@@ -9,12 +9,12 @@ const SortableCourse = SortableElement((props) => (
     </ListGroup.Item>
 ));
 
-const SortableCourseList = SortableContainer(({courses,data,poolIndex,reorder}) => {
+const SortableCourseList = SortableContainer(({courses,data,poolIndex,modifyPoolList}) => {
   return (
     <ListGroup>
       {courses.map((crs, index) => (
         <SortableCourse key={crs[0].split(' ')[0]} index={index}
-            course={crs} data={data} poolIndex={poolIndex} courseIndex={index} reorder={reorder}/>
+            course={crs} data={data} poolIndex={poolIndex} courseIndex={index} modifyPoolList={modifyPoolList}/>
       ))}
     </ListGroup>
   );
@@ -23,10 +23,13 @@ const SortableCourseList = SortableContainer(({courses,data,poolIndex,reorder}) 
 
 export default (props) => {
     function onSortEnd({oldIndex, newIndex}){
-        props.reorder("course", props.poolIndex, null, oldIndex, newIndex);
+        props.modifyPoolList("courseMove", props.poolIndex, null, oldIndex, newIndex);
+    }
+    function onDel(){
+        props.modifyPoolList("poolDel",null,null,props.poolIndex,null);
     }
 
-    const PoolHandle = SortableHandle(()=> (<i className="fa fa-bars fa-2x"></i>));
+    const PoolHandle = SortableHandle(()=> (<i className="fa fa-sort fa-2x" style={{transform:"rotate(90deg)"}}></i>));
 
     return(
         <Card className="pool" style={{width:"18rem", height:"100%"}}>
@@ -34,9 +37,9 @@ export default (props) => {
                 <Container fluid>
                     <Row>
                         <Col xs={1} className="p-0">
-                            <i className="fa fa-times-circle fa-2x"></i>
+                            <i className="fa fa-times-circle fa-2x" onClick={onDel}></i>
                         </Col>
-                        <Col xs={9}>
+                        <Col xs={10}>
                             <Card.Title>{props.pool.name}{/*</Card.Title>*/}
                             {/*<Card.Title>*/}{props.pool.nos}</Card.Title>
                         </Col>
@@ -46,7 +49,7 @@ export default (props) => {
                     </Row>
                 </Container>
 
-                <SortableCourseList courses={props.pool.courses} data={props.data} poolIndex={props.poolIndex} reorder={props.reorder}
+                <SortableCourseList courses={props.pool.courses} data={props.data} poolIndex={props.poolIndex} modifyPoolList={props.modifyPoolList}
                     helperClass="course text-center" onSortEnd={onSortEnd} useDragHandle/>
             
             </Card.Body>

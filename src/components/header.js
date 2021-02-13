@@ -16,7 +16,7 @@ export default (props) => {
                         </Media.Body>
                     </Media>
                 </Col>
-                <Col md={{span:4,offset:2}}>
+                <Col md={{span:5,offset:1}} lg={{span:4,offset:2}}>
                     <Counter server={props.server} counter={props.counter} getCount={props.getCount}/>
                 </Col>            
             </Row>

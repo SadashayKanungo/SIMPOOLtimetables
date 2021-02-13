@@ -76,6 +76,6 @@ a, a:hover{
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.section:hover{
+.addpool .section:hover{
     background-color: #fae3ad;
 }
