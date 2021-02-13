@@ -3,10 +3,7 @@ import{Container, Row, Col, Card, Spinner} from 'react-bootstrap';
 import CountUp from 'react-countup';
 
 class Counter extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
+    
     render() {
         return(            
             <Container className="text-center" style={{height:'100%'}}>

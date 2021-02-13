@@ -32,7 +32,7 @@ a, a:hover{
 
 }
 .jumbotron .card{
-    background-color: rgba(0,0,0,0.1);
+    background-color: #002040;
     border : 3px solid #7096a0;
 }
 .jumbotron .card-title{
@@ -42,7 +42,6 @@ a, a:hover{
     
 }
 .jumbotron strong{
-    background-color: rgba(0,0,0,0);
     color: #7096a0;
 }
 .dashboard{
@@ -53,10 +52,20 @@ a, a:hover{
     color: #7096a0;
     box-shadow: 5px 5px 5px rgba(0, 30, 50, 0.5);
 }
-.addpool{
-    background-color: rgba(0, 30, 50, 0.5);
-    color: #7096a0;
-    box-shadow: 5px 5px 5px #003050;
+.nosinput, .nosinput:active{
+    width:100%;
+    color:#7096a0 !important;
+    background-color: #003050 !important;
+    border : 2px solid #7096a0 !important;
+    font-weight: bold !important;
+    box-shadow: none !important;
+}
+.nosinput option, option:active, option:hover{
+    text-align: center;
+    color:#7096a0 !important;
+    background-color: #002040 !important;
+    border : 1px solid #7096a0 !important;
+    border-radius: 3px;
 }
 .course{
     background-color: #7096a0;
@@ -76,6 +85,25 @@ a, a:hover{
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.addpool .section:hover{
-    background-color: #fae3ad;
+.addpool{
+    background-color: rgba(0, 30, 50, 0.5);
+    color: #7096a0;
+    box-shadow: 5px 5px 5px #003050;
+}
+.addpool .form-control{
+    background-color: #dac38d;
+    color:#003050;
+    font-style: italic;
+    border: 1px solid #003050;
+}
+.addpool .form-control:active{
+    box-shadow: none !important;
+}
+.addpool .btn{
+    color: #dac38d !important;
+    background-color:#003050 !important;
+    border:1px solid #003050;
+}
+.addpool .btn:hover, .btn:active{
+    box-shadow: none !important;
 }
