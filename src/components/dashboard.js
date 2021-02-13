@@ -83,7 +83,6 @@ class Dashboard extends React.Component{
             newPoolList[poolIndex].nos = newData;
         }
         else {return;}
-        console.log(newPoolList);
         this.setState({poolList:newPoolList});
     }
 

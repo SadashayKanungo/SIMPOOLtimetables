@@ -55,7 +55,6 @@ export default (props) => {
                         </Col>
                     </Row>
                 </Container>
-                <div>{"["+props.pool.nos+"]"}</div>
 
                 <SortableCourseList courses={props.pool.courses} data={props.data} poolIndex={props.poolIndex} modifyPoolList={props.modifyPoolList}
                     helperClass="course text-center" onSortEnd={onSortEnd} useDragHandle/>
