@@ -13,12 +13,12 @@ const SortablePool = SortableElement((props) => (
     </ListGroup.Item>
 ));
 
-const SortablePoolList = SortableContainer(({poolList,data,modifyPoolList}) => {
+const SortablePoolList = SortableContainer(({poolList,data,modifyPoolList,availableCourses}) => {
   return (
     <ListGroup horizontal>
       {poolList.map((pool, index) => (
         <SortablePool key={pool.name} index={index}
-            pool={pool} data={data} poolIndex={index} modifyPoolList={modifyPoolList}/>
+            pool={pool} poolIndex={index} modifyPoolList={modifyPoolList} data={data} poolList={poolList} availableCourses={availableCourses} />
       ))}
     </ListGroup>
   );
@@ -43,10 +43,20 @@ class Dashboard extends React.Component{
                         nos:1
                     }
                 ],
-            submittable : false
+            availableCourses : Object.keys(this.props.data)
         };
+
         this.modifyPoolList = this.modifyPoolList.bind(this);
         this.onSortEnd = this.onSortEnd.bind(this);
+    }
+
+    findAvailableCourses = (poolList) => {
+        return Object.keys(this.props.data).filter((crscode)=>{
+            for(var pool in poolList){
+                if(poolList[pool].courses.map((crs)=>(crs[0].split(' ')[0])).includes(crscode)) return false;
+            }
+            return true;
+        });
     }
 
     modifyPoolList(method, poolIndex, courseIndex, oldData, newData){
@@ -57,6 +67,7 @@ class Dashboard extends React.Component{
         }
         else if(method==="courseAdd"){
             newPoolList[poolIndex].courses.push([]);
+            
         }
         else if(method==="poolAdd"){
             newPoolList.push({name:newData, courses:[], nos:0});
@@ -74,7 +85,7 @@ class Dashboard extends React.Component{
             newPoolList[poolIndex].courses[courseIndex].splice(oldData,1);
         }
         else if(method==="courseDel"){
-            newPoolList[poolIndex].courses.splice(oldData,1);
+            newPoolList[poolIndex].courses.splice(oldData,1);            
         }
         else if(method==="poolDel"){
             newPoolList.splice(oldData,1);
@@ -83,7 +94,8 @@ class Dashboard extends React.Component{
             newPoolList[poolIndex].nos = newData;
         }
         else {return;}
-        this.setState({poolList:newPoolList});
+
+        this.setState({poolList:newPoolList, availableCourses:this.findAvailableCourses(newPoolList)});
     }
 
     onSortEnd({oldIndex, newIndex}){
@@ -95,7 +107,7 @@ class Dashboard extends React.Component{
             <div className="dashboard pl-4 pt-0 text-center"
                 style={{display: "flex", flexWrap: "nowrap", overflow: "auto"}}>
                 
-                <SortablePoolList poolList={this.state.poolList} data={this.props.data} modifyPoolList={this.modifyPoolList}
+                <SortablePoolList poolList={this.state.poolList} data={this.props.data} availableCourses={this.state.availableCourses} modifyPoolList={this.modifyPoolList}
                     axis="x" helperClass="pool text-center rounded" onSortEnd={this.onSortEnd} useDragHandle/>
 
                 <AddPool poolList={this.state.poolList} modifyPoolList={this.modifyPoolList}/>

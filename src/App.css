@@ -46,6 +46,7 @@ a, a:hover{
 }
 .dashboard{
     min-height: 80vh;
+    overflow:visible;
 }
 .pool{
     background-color: #003050;
@@ -69,8 +70,7 @@ a, a:hover{
 }
 .course{
     background-color: #7096a0;
-    color: #003050;
-    
+    color: #003050;    
 }
 .section{
     background-color: #b0b7a7;

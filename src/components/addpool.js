@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Container, Row, Col, Form, Accordion,InputGroup,Button} from 'react-bootstrap';
+import {Card, Container, Row, Col, Form,InputGroup,Button} from 'react-bootstrap';
 
 
 export default (props) => {
@@ -18,7 +18,7 @@ export default (props) => {
             <Card.Body style={{ height: "100%"}} className="p-2 d-flex flex-column justify-content-around">
                 
                 <Card className="section">
-                    <Accordion>                        
+                                            
                         <Container fluid>
                             <Card.Body>
                             <Row className="align-items-center">
@@ -39,7 +39,7 @@ export default (props) => {
                             </Row>
                             </Card.Body>
                         </Container>
-                    </Accordion>
+                    
                 </Card>
                 
                 <Card className="section">

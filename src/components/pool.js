@@ -1,5 +1,6 @@
 import React from 'react';
 import Course from './course.js';
+import AddCourse from './addcourse';
 import {Card, Container, Row, Col, ListGroup,Form} from 'react-bootstrap';
 import {SortableContainer, SortableElement, SortableHandle} from 'react-sortable-hoc';
 
@@ -47,7 +48,7 @@ export default (props) => {
                         </Col>
                         <Col xs={4}>
                         <Form.Control className="nosinput p-1 text-center" as="select" onChange={onNosChange} value={props.pool.nos}>
-                            {props.pool.courses.map((crs,i)=>(<option value={i+1}>{i+1}</option>))}
+                            {props.pool.courses.map((crs,i)=>(<option key={i} value={i+1}>{i+1}</option>))}
                         </Form.Control>
                         </Col>
                         <Col xs={1} className="p-0">
@@ -58,7 +59,9 @@ export default (props) => {
 
                 <SortableCourseList courses={props.pool.courses} data={props.data} poolIndex={props.poolIndex} modifyPoolList={props.modifyPoolList}
                     helperClass="course text-center" onSortEnd={onSortEnd} useDragHandle/>
-            
+
+                <AddCourse poolList={props.poolList} data={props.data} availableCourses={props.availableCourses}/>
+
             </Card.Body>
         </Card>
     );
