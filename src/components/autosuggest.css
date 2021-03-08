@@ -48,7 +48,9 @@
 .react-autosuggest__suggestion {
   cursor: pointer;
   font-weight: bold !important;
+  text-align: left;
   padding: 4px 0px;
+  margin: 2px 0px;
   border-bottom : 1px solid #003050 !important;
 }
 

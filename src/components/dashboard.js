@@ -66,8 +66,7 @@ class Dashboard extends React.Component{
             newPoolList[poolIndex].courses[courseIndex].push("");
         }
         else if(method==="courseAdd"){
-            newPoolList[poolIndex].courses.push([]);
-            
+            newPoolList[poolIndex].courses.push([newData + ' ' + Object.keys(this.props.data[newData].sec)[0]]);
         }
         else if(method==="poolAdd"){
             newPoolList.push({name:newData, courses:[], nos:0});

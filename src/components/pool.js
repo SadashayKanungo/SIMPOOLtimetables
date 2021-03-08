@@ -60,7 +60,7 @@ export default (props) => {
                 <SortableCourseList courses={props.pool.courses} data={props.data} poolIndex={props.poolIndex} modifyPoolList={props.modifyPoolList}
                     helperClass="course text-center" onSortEnd={onSortEnd} useDragHandle/>
 
-                <AddCourse poolList={props.poolList} data={props.data} availableCourses={props.availableCourses}/>
+                <AddCourse poolList={props.poolList} data={props.data} availableCourses={props.availableCourses} poolIndex={props.poolIndex} modifyPoolList={props.modifyPoolList}/>
 
             </Card.Body>
         </Card>

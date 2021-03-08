@@ -1,13 +1,13 @@
 import React from 'react';
-import { Card, Container, Row, Col } from 'react-bootstrap';
+import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import AutoSuggest from 'react-autosuggest';
 import'./autosuggest.css';
 
-const getSuggestionValue = suggestion => suggestion.replace('_',' ');
+const getSuggestionValue = suggestion => suggestion.replace('_', " : ");
 
 const renderSuggestion = suggestion => (
-    <div>
-        {suggestion.replace('_',' ')}
+    <div style={{marginLeft:"5px", textAlign:"left"}}>
+        {suggestion.replace('_'," : ")}
     </div>
 );
 
@@ -51,6 +51,11 @@ class AddCourse extends React.Component{
         });
     };
 
+    onAdd = () => {
+        if(this.state.value.includes(" : "))
+            this.props.modifyPoolList("courseAdd", this.props.poolIndex, null, null, this.state.value.split(" : ")[0].replace(' ','_'));
+    }
+
     render() {
         const { value, suggestions } = this.state;
         const inputProps = {
@@ -60,7 +65,7 @@ class AddCourse extends React.Component{
         };
 
         return(
-            <Card className="section mt-5 p-1">
+            <Card className="section mt-5">
             <Card.Body>
                 <Container>
                     <Row className="align-items-center">
@@ -68,8 +73,8 @@ class AddCourse extends React.Component{
                             <i className="fa fa-plus-circle fa-3x"></i>
                         </Col>
                         <Col xs={10}>                            
-                            <Card.Title className="m-0">ADD COURSE</Card.Title>
-                        </Col>
+                            <Card.Title className="text-center m-0">ADD COURSE</Card.Title>
+                        </Col>                        
                     </Row>
                     <Row>
                         <AutoSuggest
@@ -80,6 +85,9 @@ class AddCourse extends React.Component{
                             renderSuggestion={renderSuggestion}
                             inputProps={inputProps}
                         />
+                    </Row>
+                    <Row className="justify-content-center mt-1">
+                        <Button size="sm" onClick={this.onAdd}>ADD</Button>
                     </Row>
                 </Container>
             </Card.Body>
