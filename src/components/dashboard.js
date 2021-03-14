@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import arrayMove from 'array-move';
 import { ListGroup } from 'react-bootstrap';
 import {SortableContainer,SortableElement} from 'react-sortable-hoc';
@@ -25,12 +25,11 @@ const SortablePoolList = SortableContainer(({poolList,data,modifyPoolList,availa
 });
 
 
-class Dashboard extends React.Component{
-    constructor(props){
-        super(props);
+export default function Dashboard(props){
+
+
         
-        this.state = {
-            poolList :
+        const[poolList,setpoollist] = useState(
                 [
                     {   
                         name:"CDCs", 
@@ -42,16 +41,15 @@ class Dashboard extends React.Component{
                         courses:[["EEE_F215 L1+T1+P1","EEE_F215 L2+T2+P4","EEE_F215 L4+T1+P1","EEE_F215 L3+T1+P4"],["ECON_F212 L1+T1"]],
                         nos:1
                     }
-                ],
-            availableCourses : Object.keys(this.props.data)
-        };
+                ])
 
-        this.modifyPoolList = this.modifyPoolList.bind(this);
-        this.onSortEnd = this.onSortEnd.bind(this);
-    }
+        const [availableCourses,setavailableCourses] =useState(Object.keys(props.data));
+   
 
-    findAvailableCourses = (poolList) => {
-        return Object.keys(this.props.data).filter((crscode)=>{
+
+
+    const findAvailableCourses = (poolList) => {
+        return Object.keys(props.data).filter((crscode)=>{
             for(var pool in poolList){
                 if(poolList[pool].courses.map((crs)=>(crs[0].split(' ')[0])).includes(crscode)) return false;
             }
@@ -59,14 +57,14 @@ class Dashboard extends React.Component{
         });
     }
 
-    modifyPoolList(method, poolIndex, courseIndex, oldData, newData){
-        var newPoolList = this.state.poolList.slice();
+    const modifyPoolList=(method, poolIndex, courseIndex, oldData, newData)=>{
+        var newPoolList = poolList.slice();
 
         if(method==="sectionAdd"){            
             newPoolList[poolIndex].courses[courseIndex].push("");
         }
         else if(method==="courseAdd"){
-            newPoolList[poolIndex].courses.push([newData + ' ' + Object.keys(this.props.data[newData].sec)[0]]);
+            newPoolList[poolIndex].courses.push([newData + ' ' + Object.keys(props.data[newData].sec)[0]]);
         }
         else if(method==="poolAdd"){
             newPoolList.push({name:newData, courses:[], nos:0});
@@ -94,25 +92,24 @@ class Dashboard extends React.Component{
         }
         else {return;}
 
-        this.setState({poolList:newPoolList, availableCourses:this.findAvailableCourses(newPoolList)});
+        setpoollist(newPoolList);
+        setavailableCourses(findAvailableCourses(newPoolList));
     }
 
-    onSortEnd({oldIndex, newIndex}){
-        this.modifyPoolList("poolMove", null, null, oldIndex, newIndex);
+    const onSortEnd=({oldIndex, newIndex})=>{
+        modifyPoolList("poolMove", null, null, oldIndex, newIndex);
     }
 
-    render() {
+
         return(
             <div className="dashboard pl-4 pt-0 text-center"
                 style={{display: "flex", flexWrap: "nowrap", overflow: "auto"}}>
                 
-                <SortablePoolList poolList={this.state.poolList} data={this.props.data} availableCourses={this.state.availableCourses} modifyPoolList={this.modifyPoolList}
-                    axis="x" helperClass="pool text-center rounded" onSortEnd={this.onSortEnd} useDragHandle/>
+                <SortablePoolList poolList={poolList} data={props.data} availableCourses={availableCourses} modifyPoolList={modifyPoolList}
+                    axis="x" helperClass="pool text-center rounded" onSortEnd={onSortEnd} useDragHandle/>
 
-                <AddPool poolList={this.state.poolList} modifyPoolList={this.modifyPoolList}/>
+                <AddPool poolList={poolList} modifyPoolList={modifyPoolList}/>
             </div>
         );
-    }
 }
 
-export default Dashboard;
