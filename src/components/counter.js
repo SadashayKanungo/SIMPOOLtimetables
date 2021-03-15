@@ -2,9 +2,8 @@ import React from 'react';
 import{Container, Row, Col, Card, Spinner} from 'react-bootstrap';
 import CountUp from 'react-countup';
 
-class Counter extends React.Component{
+export default function Counter (props){
     
-    render() {
         return(            
             <Container className="text-center" style={{height:'100%'}}>
                 <Row>
@@ -12,8 +11,8 @@ class Counter extends React.Component{
                         <Card>
                             <Card.Body className="p-2">
                                 <Card.Title>
-                                    {this.props.counter.count ?
-                                        <CountUp separator="," end={this.props.counter.count.tables} /> :
+                                    {props.counter.count ?
+                                        <CountUp separator="," end={props.counter.count.tables} /> :
                                         <><Spinner animation="grow" size="sm" />
                                         <Spinner animation="grow" size="sm" />
                                         <Spinner animation="grow" size="sm" /></>
@@ -28,8 +27,8 @@ class Counter extends React.Component{
                         <Card>
                             <Card.Body className="p-2">
                                 <Card.Title>
-                                {this.props.counter.count ?
-                                        <CountUp separator="," end={this.props.counter.count.students} /> :
+                                {props.counter.count ?
+                                        <CountUp separator="," end={props.counter.count.students} /> :
                                         <><Spinner animation="grow" size="sm" />
                                         <Spinner animation="grow" size="sm" />
                                         <Spinner animation="grow" size="sm" /></>
@@ -43,7 +42,4 @@ class Counter extends React.Component{
                 </Row>
             </Container>            
         );
-    }
 }
-
-export default Counter;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import AutoSuggest from 'react-autosuggest';
 import'./autosuggest.css';
@@ -12,56 +12,42 @@ const renderSuggestion = suggestion => (
 );
 
 
-class AddCourse extends React.Component{
-    constructor(props){
-        super(props);
-        
-        this.state = {
-            value : '',
-            suggestions : []
-        };
-    }    
+export default function AddCourse(props){
+ const [value,setvalue]=useState('');
+ const [suggestions,setsuggestions]=useState([]); 
 
-    onSuggestionsFetchRequested = ({ value }) => {
+   const  onSuggestionsFetchRequested = ({ value }) => {
         const inputValue = value.toUpperCase();
         const inputLength = value.length;
       
         const suggestions = inputLength === 0 ? [] :
-            this.props.availableCourses
-            .map(crscode => (crscode.replace('_', ' ') +'_'+ this.props.data[crscode].name))
+            props.availableCourses
+            .map(crscode => (crscode.replace('_', ' ') +'_'+ props.data[crscode].name))
             .filter(crsCodeName =>
                 (crsCodeName.split('_')[0].slice(0,inputLength) === inputValue || crsCodeName.split('_')[1].slice(0,inputLength) === inputValue)
             )
             .slice(0,5);
       
-        this.setState({
-            suggestions: suggestions
-        });
+            setsuggestions(suggestions);
+
+    };
+    const   onSuggestionsClearRequested = () => {
+        setsuggestions([]);
     };
 
-    onSuggestionsClearRequested = () => {
-        this.setState({
-            suggestions: []
-        });
+    const onChange = (event, { newValue }) => {
+    setvalue(newValue);
     };
 
-    onChange = (event, { newValue }) => {
-        this.setState({
-            value: newValue
-        });
-    };
-
-    onAdd = () => {
-        if(this.state.value.includes(" : "))
-            this.props.modifyPoolList("courseAdd", this.props.poolIndex, null, null, this.state.value.split(" : ")[0].replace(' ','_'));
+    const onAdd = () => {
+        if(value.includes(" : "))
+            props.modifyPoolList("courseAdd", props.poolIndex, null, null, value.split(" : ")[0].replace(' ','_'));
     }
 
-    render() {
-        const { value, suggestions } = this.state;
         const inputProps = {
             placeholder : 'Search',
             value,
-            onChange : this.onChange
+            onChange : onChange
         };
 
         return(
@@ -79,21 +65,19 @@ class AddCourse extends React.Component{
                     <Row>
                         <AutoSuggest
                             suggestions={suggestions}
-                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={onSuggestionsClearRequested}
                             getSuggestionValue={getSuggestionValue}
                             renderSuggestion={renderSuggestion}
                             inputProps={inputProps}
                         />
                     </Row>
                     <Row className="justify-content-center mt-1">
-                        <Button size="sm" onClick={this.onAdd}>ADD</Button>
+                        <Button size="sm" onClick={onAdd}>ADD</Button>
                     </Row>
                 </Container>
             </Card.Body>
         </Card>
         );
-    }
 }
 
-export default AddCourse;
