@@ -1,5 +1,6 @@
 import React from 'react';
 import Course from './course.js';
+import FillCDC from './fillcdc.js';
 import AddCourse from './addcourse';
 import {Card, Container, Row, Col, ListGroup,Form} from 'react-bootstrap';
 import {SortableContainer, SortableElement, SortableHandle} from 'react-sortable-hoc';
@@ -36,7 +37,7 @@ export default (props) => {
     const PoolHandle = SortableHandle(()=> (<i className="fa fa-sort fa-2x" style={{transform:"rotate(90deg)"}}></i>));
 
     return(
-        <Card className="pool" style={{width:"18rem", minHeight:"22rem"}}>
+        <Card className="pool" style={{width:"18rem", minHeight:"22rem", height:"100%"}}>
             <Card.Body className="p-2">
                 <Container fluid>
                     <Row>
@@ -44,8 +45,8 @@ export default (props) => {
                             <i className="fa fa-times-circle fa-2x" onClick={onDel}></i>
                         </Col>
                         <Col xs={6} className="align-items-center">
-                            <Card.Title className="m-0 mt-1">{props.pool.name}</Card.Title>
-                        </Col>
+                            <Card.Title className="m-0 mt-1 text-center"><strong>{props.pool.name}</strong></Card.Title>
+                        </Col>                        
                         <Col xs={4}>
                         <Form.Control className="nosinput p-1 text-center" as="select" onChange={onNosChange} value={props.pool.nos}>
                             {props.pool.courses.map((crs,i)=>(<option key={i} value={i+1}>{i+1}</option>))}
@@ -60,8 +61,12 @@ export default (props) => {
                 <SortableCourseList courses={props.pool.courses} data={props.data} poolIndex={props.poolIndex} modifyPoolList={props.modifyPoolList}
                     helperClass="course text-center" onSortEnd={onSortEnd} useDragHandle/>
 
-                <AddCourse poolList={props.poolList} data={props.data} availableCourses={props.availableCourses} poolIndex={props.poolIndex} modifyPoolList={props.modifyPoolList}/>
-
+                {
+                    props.pool.name === "CDCs" ?
+                        <FillCDC data={props.data} modifyPoolList={props.modifyPoolList} poolIndex={props.poolIndex} serverURL={props.serverURL} />
+                    :
+                        <AddCourse poolList={props.poolList} data={props.data} availableCourses={props.availableCourses} poolIndex={props.poolIndex} modifyPoolList={props.modifyPoolList}/>
+                }
             </Card.Body>
         </Card>
     );

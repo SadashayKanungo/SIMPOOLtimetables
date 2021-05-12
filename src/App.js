@@ -4,7 +4,7 @@ import Header from './components/header.js';
 import Dashboard from './components/dashboard.js';
 import Footer from './components/footer.js';
 
-import tempdata from './datadictminnew.json';
+//import tempdata from './datadictminnew.json';
 
 const serverURL = 'http://localhost:2000';
 
@@ -13,7 +13,7 @@ class App extends React.Component  {
     super(props);
     this.state = {
       counter:{count:null},
-      data: tempdata
+      data: {}
     }
 
     this.getCount = this.getCount.bind(this);
@@ -45,8 +45,7 @@ class App extends React.Component  {
     return (
       <div className="App">                     
         <Header server={serverURL} counter={this.state.counter} getCount={this.getCount}/>
-        <div className="fluid text-center">{this.state.data ? "READY" : "FETCHING DATA..."}</div>
-        <Dashboard data={this.state.data}/>
+        <Dashboard data={this.state.data} serverURL={serverURL}/>
         <Footer />
       </div>
     );

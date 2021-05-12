@@ -13,12 +13,12 @@ const SortablePool = SortableElement((props) => (
     </ListGroup.Item>
 ));
 
-const SortablePoolList = SortableContainer(({poolList,data,modifyPoolList,availableCourses}) => {
+const SortablePoolList = SortableContainer(({poolList,data,modifyPoolList,availableCourses,serverURL}) => {
   return (
     <ListGroup horizontal>
       {poolList.map((pool, index) => (
         <SortablePool key={pool.name} index={index}
-            pool={pool} poolIndex={index} modifyPoolList={modifyPoolList} data={data} poolList={poolList} availableCourses={availableCourses} />
+            pool={pool} poolIndex={index} modifyPoolList={modifyPoolList} data={data} poolList={poolList} availableCourses={availableCourses} serverURL={serverURL}/>
       ))}
     </ListGroup>
   );
@@ -26,28 +26,27 @@ const SortablePoolList = SortableContainer(({poolList,data,modifyPoolList,availa
 
 
 export default function Dashboard(props){
-
-
         
-        const[poolList,setpoollist] = useState(
-                [
-                    {   
-                        name:"CDCs", 
-                        courses:[["MATH_F211 L1+T1","MATH_F211 L4+T4"],["ECON_F211 L1+T1"]], 
-                        nos:1
-                    },
-                    {
-                        name:"DELs", 
-                        courses:[["EEE_F215 L1+T1+P1","EEE_F215 L2+T2+P4","EEE_F215 L4+T1+P1","EEE_F215 L3+T1+P4"],["ECON_F212 L1+T1"]],
-                        nos:1
-                    }
-                ])
+    const[poolList,setpoolList] = useState(
+        [
+            {   
+                name:"CDCs", 
+                courses:[],
+                nos:0
+            },
+            {   
+                name:"DELs", 
+                courses:[],
+                nos:0
+            },
+            {   
+                name:"HELs", 
+                courses:[],
+                nos:0
+            }
+        ])
 
-        const [availableCourses,setavailableCourses] =useState(Object.keys(props.data));
-   
-
-
-
+    const [availableCourses,setavailableCourses] =useState(Object.keys(props.data));
     const findAvailableCourses = (poolList) => {
         return Object.keys(props.data).filter((crscode)=>{
             for(var pool in poolList){
@@ -60,7 +59,14 @@ export default function Dashboard(props){
     const modifyPoolList=(method, poolIndex, courseIndex, oldData, newData)=>{
         var newPoolList = poolList.slice();
 
-        if(method==="sectionAdd"){            
+        if(method==="cdc"){
+            newPoolList[poolIndex] = {   
+                name:"CDCs", 
+                courses:newData,
+                nos:newData.length
+            };
+        }
+        else if(method==="sectionAdd"){            
             newPoolList[poolIndex].courses[courseIndex].push("");
         }
         else if(method==="courseAdd"){
@@ -80,6 +86,7 @@ export default function Dashboard(props){
         }
         else if(method==="sectionDel"){            
             newPoolList[poolIndex].courses[courseIndex].splice(oldData,1);
+            if( !newPoolList[poolIndex].courses[courseIndex].length ) newPoolList[poolIndex].courses.splice(courseIndex,1);
         }
         else if(method==="courseDel"){
             newPoolList[poolIndex].courses.splice(oldData,1);            
@@ -92,7 +99,7 @@ export default function Dashboard(props){
         }
         else {return;}
 
-        setpoollist(newPoolList);
+        setpoolList(newPoolList);
         setavailableCourses(findAvailableCourses(newPoolList));
     }
 
@@ -105,7 +112,7 @@ export default function Dashboard(props){
             <div className="dashboard pl-4 pt-0 text-center"
                 style={{display: "flex", flexWrap: "nowrap", overflow: "auto"}}>
                 
-                <SortablePoolList poolList={poolList} data={props.data} availableCourses={availableCourses} modifyPoolList={modifyPoolList}
+                <SortablePoolList poolList={poolList} data={props.data} availableCourses={availableCourses} modifyPoolList={modifyPoolList} serverURL={props.serverURL}
                     axis="x" helperClass="pool text-center rounded" onSortEnd={onSortEnd} useDragHandle/>
 
                 <AddPool poolList={poolList} modifyPoolList={modifyPoolList}/>

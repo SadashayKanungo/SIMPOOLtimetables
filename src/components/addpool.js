@@ -6,7 +6,7 @@ export default (props) => {
     function onAdd(){
         function makeUnique(name,poolList){
             for (var pool of poolList){
-                if (pool.name === name) return makeUnique(name + " NEW");
+                if (pool.name === name) return makeUnique("NEW "+name, poolList);
             }
             return name;
         }        
@@ -31,7 +31,7 @@ export default (props) => {
                             </Row>
                             <Row>
                                 <InputGroup className="mt-2">
-                                    <Form.Control id="newpoolname" defaultValue={"Pool "+(props.poolList.length+1)}/>
+                                    <Form.Control id="newpoolname" defaultValue={"NEW PooL"}/>
                                     <InputGroup.Append>
                                         <Button onClick={onAdd}>ADD</Button>
                                     </InputGroup.Append>

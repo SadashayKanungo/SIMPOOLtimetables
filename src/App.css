@@ -90,14 +90,18 @@ a, a:hover{
     color: #7096a0;
     box-shadow: 5px 5px 5px #003050;
 }
-.addpool .form-control{
+.form-control{
     background-color: #dac38d;
     color:#003050;
     font-style: italic;
     border: 1px solid #003050;
 }
-.addpool .form-control:active{
+.form-control:focus{
     box-shadow: none !important;
+    background-color: #dac38d;
+    color:#003050;
+    font-style: italic;
+    border: 1px solid #003050;
 }
 .btn{
     color: #dac38d !important;
